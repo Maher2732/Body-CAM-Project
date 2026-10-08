@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+
+config.json
+bgutil-ytdlp-pot-provider/
+data/videos/
+data/clips/
+.DS_Store
+.vscode/

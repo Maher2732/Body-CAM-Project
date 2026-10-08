@@ -1,0 +1,7 @@
+{
+  "excel_path": "data/LABDATA_1.xlsx",
+  "video_folder": "data/videos",
+  "clip_folder": "data/clips",
+  "ffmpeg_exe": "PATH_TO_FFMPEG_EXE",
+  "browser": "firefox"
+}
