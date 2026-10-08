@@ -1,0 +1,77 @@
+1. Create a Python virtual environment
+
+Windows:
+python -m venv .venv
+.venv\Scripts\activate
+
+macOS / Linux:
+python3 -m venv .venv
+source .venv/bin/activate
+
+
+2. Install the required Python libraries
+
+Windows:
+pip install -r requirements.txt
+
+macOS / Linux:
+pip3 install -r requirements.txt
+
+
+3. Install FFmpeg
+
+Windows:
+winget install Gyan.FFmpeg
+
+Then find the FFmpeg path:
+where.exe ffmpeg
+
+macOS:
+brew install ffmpeg
+
+Then find the FFmpeg path:
+which ffmpeg
+
+
+4. Create your config file
+
+Copy config.example.json and rename the copy to config.json.
+
+Windows:
+Copy-Item config.example.json config.json
+
+macOS / Linux:
+cp config.example.json config.json
+
+Then open config.json and replace PATH_TO_FFMPEG with the FFmpeg path from Step 4.
+
+Example config.json:
+
+{
+  "excel_path": "data/LABDATA_1.xlsx",
+  "video_folder": "data/videos",
+  "clip_folder": "data/clips",
+  "ffmpeg_exe": "PATH_TO_FFMPEG",
+  "browser": "firefox"
+}
+
+
+5. Firefox / YouTube setup
+
+The downloader currently uses Firefox cookies.
+
+Make sure:
+- Firefox is installed.
+- You are logged into YouTube in Firefox.
+- If the downloader cannot access cookies, close Firefox and try again.
+
+
+6. Run the project
+
+Windows:
+.venv\Scripts\activate
+python src/main.py
+
+macOS / Linux:
+source .venv/bin/activate
+python3 src/main.py
