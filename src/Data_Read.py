@@ -1,8 +1,7 @@
 import pandas as pd
 import yt_dlp
 import json
-with open("config.json", "r") as file:
-    config = json.load(file)
+from config import config
 
 
 def read_data():

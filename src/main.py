@@ -1,25 +1,27 @@
 from Data_Read import read_data, get_urls, download_videos
 from video_reader import parse_timeframe, extract_clip
+from dataset_builder import (
+    build_dataset,
+    check_missing_clips,
+    save_dataset
+)
+from config import config
 
 
 def main():
-    
     df = read_data()
 
     print(f"Rows: {df.shape[0]}")
     print(f"Columns: {df.shape[1]}")
 
-    
     urls = get_urls(df)
     download_videos(urls)
 
-    
     segments = df[["video ID", "timeframe"]].dropna()
     segments = segments.drop_duplicates()
 
     errors = []
 
-    
     for _, row in segments.iterrows():
         video_id = row["video ID"]
         timeframe = row["timeframe"]
@@ -51,6 +53,26 @@ def main():
             )
     else:
         print("No errors found.")
+
+    cleaned_df = build_dataset(df)
+
+    missing_clips = check_missing_clips(
+        cleaned_df,
+        config["clip_folder"]
+    )
+
+    if missing_clips:
+        print(f"\nMissing clips after dataset build: {len(missing_clips)}")
+
+        for clip in missing_clips:
+            print(clip)
+    else:
+        print("\nAll clips found in cleaned dataset.")
+
+    save_dataset(
+        cleaned_df,
+        config["cleaned_dataset"]
+    )
 
 
 if __name__ == "__main__":
