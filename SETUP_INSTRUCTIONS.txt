@@ -43,7 +43,7 @@ Copy-Item config.example.json config.json
 macOS / Linux:
 cp config.example.json config.json
 
-Then open config.json and replace PATH_TO_FFMPEG with the FFmpeg path from Step 4.
+Then open config.json and replace PATH_TO_FFMPEG_EXE with the FFmpeg path from Step 3.
 
 Example config.json:
 
@@ -51,9 +51,13 @@ Example config.json:
   "excel_path": "data/LABDATA_1.xlsx",
   "video_folder": "data/videos",
   "clip_folder": "data/clips",
-  "ffmpeg_exe": "PATH_TO_FFMPEG",
-  "browser": "firefox"
+  "ffmpeg_exe": "PATH_TO_FFMPEG_EXE",
+  "browser": "firefox",
+  "cleaned_dataset": "data/cleaned_annotations.xlsx"
 }
+
+On Windows, use forward slashes or double backslashes in the FFmpeg path, e.g.
+"C:/ffmpeg/bin/ffmpeg.exe" or "C:\\ffmpeg\\bin\\ffmpeg.exe"
 
 
 5. Firefox / YouTube setup
@@ -68,6 +72,8 @@ Make sure:
 
 6. Run the project
 
+Run from the project root folder (where config.json is), not from inside src/.
+
 Windows:
 .venv\Scripts\activate
 python src/main.py
@@ -75,3 +81,6 @@ python src/main.py
 macOS / Linux:
 source .venv/bin/activate
 python3 src/main.py
+
+The pipeline downloads videos to data/videos, cuts clips into data/clips,
+and saves the cleaned dataset to data/cleaned_annotations.xlsx.
