@@ -3,5 +3,6 @@
   "video_folder": "data/videos",
   "clip_folder": "data/clips",
   "ffmpeg_exe": "PATH_TO_FFMPEG_EXE",
-  "browser": "firefox"
+  "browser": "firefox",
+  "cleaned_dataset": "data/cleaned_annotations.xlsx"
 }
