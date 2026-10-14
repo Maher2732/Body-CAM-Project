@@ -4,8 +4,8 @@ import json
 from config import config
 
 
-def read_data():
-    df = pd.read_excel(config["excel_path"])
+def read_data(path):
+    df = pd.read_excel(path)
 
     df.columns = df.columns.str.strip()
 

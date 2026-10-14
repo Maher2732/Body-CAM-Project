@@ -20,6 +20,6 @@ SETUP_INSTRUCTIONS.txt
 
 - `src/` - Python source code
 - `data/` - Excel data and local video folders
-- `Models/` - ML models
+- `models/` - ML models
 - `results/` - experiment results
 - `config.example.json` - example local configuration

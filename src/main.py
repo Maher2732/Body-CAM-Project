@@ -1,21 +1,23 @@
-from Data_Read import read_data, get_urls, download_videos
+from data_read import read_data, get_urls, download_videos
 from video_reader import parse_timeframe, extract_clip
 from dataset_builder import (
     build_dataset,
     check_missing_clips,
     save_dataset
 )
+from explore import explore_data
+from train_baseline import train_model
 from config import config
 
 
 def main():
-    df = read_data()
+    df = read_data(config["excel_path"])
 
     print(f"Rows: {df.shape[0]}")
     print(f"Columns: {df.shape[1]}")
 
-    urls = get_urls(df)
-    download_videos(urls)
+    #urls = get_urls(df)
+    #download_videos(urls)
 
     segments = df[["video ID", "timeframe"]].dropna()
     segments = segments.drop_duplicates()
@@ -74,6 +76,8 @@ def main():
         config["cleaned_dataset"]
     )
 
+    explore_data(cleaned_df)
+    train_model(cleaned_df)
 
 if __name__ == "__main__":
     main()
