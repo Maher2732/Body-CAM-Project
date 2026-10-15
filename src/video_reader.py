@@ -25,12 +25,16 @@ def parse_timeframe(timeframe):
     return start_seconds, end_seconds
 
 
+def clip_filename(video_id, start, end):
+    return f"{video_id}_{start:05d}_{end:05d}.mp4"
+
+
 def extract_clip(video_id, start, end):
     input_path = VIDEO_FOLDER / f"{video_id}.mp4"
 
     CLIP_FOLDER.mkdir(parents=True, exist_ok=True)
 
-    output_path = CLIP_FOLDER / f"{video_id}_{start}_{end}.mp4"
+    output_path = CLIP_FOLDER / clip_filename(video_id, start, end)
 
     if output_path.exists():
         print(f"Skipping existing clip: {output_path.name}")

@@ -18,8 +18,10 @@ SETUP_INSTRUCTIONS.txt
 
 ## Project Structure
 
-- `src/` - Python source code
+- `src/` - data preparation code
+- `src/llm/` - LLM / multimodal model experiments
 - `data/` - Excel data and local video folders
 - `models/` - ML models
-- `results/` - experiment results
+- `results/predictions/` - raw model outputs
+- `results/metrics/` - scores vs. ground truth
 - `config.example.json` - example local configuration

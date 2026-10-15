@@ -40,6 +40,15 @@ Then find the FFmpeg path:
 which ffmpeg
 
 
+3b. Install Deno (needed by yt-dlp for YouTube downloads)
+
+macOS:
+brew install deno
+
+Windows:
+winget install DenoLand.Deno
+
+
 4. Create your config file
 
 Copy config.example.json and rename the copy to config.json.

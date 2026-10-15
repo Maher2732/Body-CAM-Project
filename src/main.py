@@ -16,8 +16,8 @@ def main():
     print(f"Rows: {df.shape[0]}")
     print(f"Columns: {df.shape[1]}")
 
-    #urls = get_urls(df)
-    #download_videos(urls)
+    urls = get_urls(df)
+    download_videos(urls)
 
     segments = df[["video ID", "timeframe"]].dropna()
     segments = segments.drop_duplicates()

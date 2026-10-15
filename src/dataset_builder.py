@@ -1,6 +1,6 @@
 from pathlib import Path
 import pandas as pd
-from video_reader import parse_timeframe
+from video_reader import parse_timeframe, clip_filename
 
 
 COLUMN_RENAMES = {
@@ -105,9 +105,7 @@ def add_clip_files(df):
 
         start, end = parse_timeframe(timeframe)
 
-        df.at[index, "clip_file"] = (
-            f"{video_id}_{start}_{end}.mp4"
-        )
+        df.at[index, "clip_file"] = clip_filename(video_id, start, end)
 
     return df
 
@@ -151,6 +149,8 @@ def save_dataset(df, output_path):
 
 
 def build_dataset(df):
+    df = df.dropna(subset=["video ID"]).reset_index(drop=True)
+
     df = clean_columns(df)
 
     df = clean_numeric_columns(df)
