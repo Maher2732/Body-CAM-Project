@@ -1,7 +1,7 @@
-from pathlib import Path
 import subprocess
-from config import config
+from pathlib import Path
 
+from config import config
 
 VIDEO_FOLDER = Path(config["video_folder"])
 CLIP_FOLDER = Path(config["clip_folder"])
@@ -44,12 +44,17 @@ def extract_clip(video_id, start, end):
 
     command = [
         FFMPEG_EXE,
-        "-ss", str(start),
-        "-i", str(input_path),
-        "-t", str(duration),
-        "-c:v", "libx264",
-        "-c:a", "aac",
-        str(output_path)
+        "-ss",
+        str(start),
+        "-i",
+        str(input_path),
+        "-t",
+        str(duration),
+        "-c:v",
+        "libx264",
+        "-c:a",
+        "aac",
+        str(output_path),
     ]
 
     subprocess.run(command, check=True)

@@ -9,3 +9,4 @@ data/videos/
 data/clips/
 .DS_Store
 .vscode/
+.env

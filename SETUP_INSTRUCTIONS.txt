@@ -78,17 +78,16 @@ On Windows, use forward slashes or double backslashes in the FFmpeg path, e.g.
 
 5. Firefox / YouTube setup
 
-The downloader currently uses Firefox cookies.
+The downloader uses your browser's cookies. The browser is set by the "browser"
+key in config.json (default: firefox).
 
 Make sure:
-- Firefox is installed.
-- You are logged into YouTube in Firefox.
-- If the downloader cannot access cookies, close Firefox and try again.
+- That browser is installed.
+- You are logged into YouTube in that browser.
+- If the downloader cannot access cookies, close the browser and try again.
 
 
 6. Run the project
-
-Run from the project root folder (where config.json is), not from inside src/.
 
 Windows:
 .venv\Scripts\activate
@@ -104,3 +103,18 @@ main.py runs the whole project in order:
 3. Saves the cleaned dataset to data/cleaned_annotations.xlsx
 4. Prints a summary of the data (risk levels, missing values, rows per video,
    correlations and average risk by category)
+5. Prints the majority-class baseline for the low / medium / high risk groups
+
+To skip the YouTube download and use the videos you already have:
+
+python src/main.py --skip-download
+
+Close data/cleaned_annotations.xlsx in Excel before running, or saving it fails.
+
+
+7. Gemini API key (only for the LLM experiments in src/llm/)
+
+1. Create a key at https://aistudio.google.com/apikey
+2. Copy .env.example to .env (in the project root) and paste your key after
+   GEMINI_API_KEY=
+3. Never commit .env or share the key. .env is git-ignored.

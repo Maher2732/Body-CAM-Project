@@ -1,7 +1,8 @@
 from pathlib import Path
-import pandas as pd
-from video_reader import parse_timeframe, clip_filename
 
+import pandas as pd
+
+from video_reader import clip_filename, parse_timeframe
 
 COLUMN_RENAMES = {
     "Unnamed: 11": "conflict_escalation_gesture",
@@ -76,22 +77,14 @@ def clean_columns(df):
 
 def clean_numeric_columns(df):
     for col in NUMERIC_COLUMNS:
-        df[col] = pd.to_numeric(
-            df[col],
-            errors="coerce"
-        )
+        df[col] = pd.to_numeric(df[col], errors="coerce")
 
     return df
 
 
 def clean_text_columns(df):
     for col in TEXT_COLUMNS:
-        df[col] = (
-            df[col]
-            .astype("string")
-            .str.strip()
-            .str.lower()
-        )
+        df[col] = df[col].astype("string").str.strip().str.lower()
 
     return df
 
@@ -116,15 +109,10 @@ def check_missing_clips(df, clip_folder):
     missing_clips = []
 
     for _, row in df.iterrows():
-        clip_path = (
-            clip_folder /
-            row["clip_file"]
-        )
+        clip_path = clip_folder / row["clip_file"]
 
         if not clip_path.exists():
-            missing_clips.append(
-                row["clip_file"]
-            )
+            missing_clips.append(row["clip_file"])
 
     return missing_clips
 
@@ -132,20 +120,11 @@ def check_missing_clips(df, clip_folder):
 def save_dataset(df, output_path):
     output_path = Path(output_path)
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True
-    )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    df.to_excel(
-        output_path,
-        index=False
-    )
+    df.to_excel(output_path, index=False)
 
-    print(
-        f"Saved cleaned dataset to: "
-        f"{output_path}"
-    )
+    print(f"Saved cleaned dataset to: {output_path}")
 
 
 def build_dataset(df):

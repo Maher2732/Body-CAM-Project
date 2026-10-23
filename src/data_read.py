@@ -1,6 +1,6 @@
 import pandas as pd
 import yt_dlp
-import json
+
 from config import config
 
 
@@ -11,6 +11,7 @@ def read_data(path):
 
     return df
 
+
 def get_urls(df):
     cols_to_clean = [
         "gender",
@@ -18,7 +19,7 @@ def get_urls(df):
         "call for backup",
         "Unnamed: 39",
         "Unnamed: 40",
-        "Unnamed: 41"
+        "Unnamed: 41",
     ]
 
     for col in cols_to_clean:
@@ -31,31 +32,25 @@ def get_urls(df):
     urls = urls.drop_duplicates(subset=["video ID"])
 
     return urls
-   
 
 
 def download_videos(urls):
+    video_folder = config["video_folder"]
+    browser = config.get("browser", "firefox")
+
     for _, row in urls.iterrows():
         clip_id = row["video ID"]
         url = row["link"]
         options = {
-            "outtmpl": f"{config["video_folder"]}/{clip_id}.%(ext)s",
-            
+            "outtmpl": f"{video_folder}/{clip_id}.%(ext)s",
             "format": "bestvideo[height<=1080]+bestaudio/best[height<=1080]",
-            
             "merge_output_format": "mp4",
-            
             "noplaylist": True,
-            
             "ignoreerrors": True,
-            
             "quiet": False,
-            
             "overwrites": False,
-            
-            "cookiesfrombrowser": ("firefox",)
-            
-            }
+            "cookiesfrombrowser": (browser,),
+        }
         with yt_dlp.YoutubeDL(options) as ydl:
             try:
                 print(f"Downloading {clip_id}: {url}")
